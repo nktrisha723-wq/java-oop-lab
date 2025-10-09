@@ -1,0 +1,82 @@
+ import java.util.ArrayList;
+import java.util.Collections;
+
+class Student {
+    private String id;
+    private String name;
+    private double[] scores;       
+    private ArrayList<String> skills; 
+    
+    public Student(String id, String name, double[] scores) {
+        this.id = id;
+        this.name = name;
+        this.scores = scores;
+        this.skills = new ArrayList<>();
+    }
+
+        public double getSum() {
+        double sum = 0;
+        for (double s : scores) sum += s;
+        return sum;
+    }
+
+        public double getAverage() {
+        if (scores.length == 0) return 0.0;
+        return getSum() / scores.length;
+    }
+
+        public void addSkill(String skill) {
+        skills.add(skill);
+    }
+
+        public void removeSkill(String skill) {
+        skills.remove(skill);
+    }
+
+    
+    public boolean isHavingSkill(String skill) {
+        return skills.contains(skill);
+    }
+
+    
+    public void printSkills() {
+        Collections.sort(skills);
+        System.out.println("Skills: " + skills);
+    }
+
+        public String toString() {
+        return "Student ID: " + id +
+               "\nName: " + name +
+               "\nTotal Score: " + getSum() +
+               "\nAverage Score: " + getAverage() +
+               "\nSkills: " + skills;
+    }
+}
+
+
+public class Main {
+    public static void main(String[] args) {
+        double[] scores = {85.5, 90, 78};
+        Student s1 = new Student("2024202243", "Trisha", scores);
+
+        s1.addSkill("Java");
+        s1.addSkill("Python");
+        s1.addSkill("C++");
+
+        System.out.println(s1);
+
+        System.out.println("Has Python? " + s1.isHavingSkill("Python"));
+
+        s1.removeSkill("C++");
+        s1.printSkills();
+    }
+}
+ouput:-
+Student ID: 2024202243
+Name: Trisha
+Total Score: 253.5
+Average Score: 84.5
+Skills: [Java, Python, C++]
+Has Python? true
+Skills: [Java, Python]
+
